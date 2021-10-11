@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime
+from datetime import datetime
 
 from database import Base
 
@@ -15,9 +16,9 @@ class Request(Base):
     phone = Column(String)
     birthdate = Column(String)
     serial_number = Column(String)
-    issued_by = Column(String)
+    issued_by = Column(String, nullable=True)
     link_id = Column(String, unique=True, index=True)
-    order_id = Column(Integer, unique=True, index=True)
-    created_date = Column(DateTime)
-    analysis_date = Column(DateTime)
-    result_date = Column(DateTime)
+    order_id = Column(Integer, nullable=True)
+    created_date = Column(DateTime, default=datetime.now)
+    analysis_date = Column(DateTime, nullable=True)
+    result_date = Column(DateTime, nullable=True)

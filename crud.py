@@ -1,6 +1,8 @@
 from sqlalchemy.orm import Session
 
-from . import models, schemas
+import models
+import schemas
+from utils import generate_string
 
 
 def get_request(db: Session, order_id: int):
@@ -8,7 +10,8 @@ def get_request(db: Session, order_id: int):
 
 
 def create_request(db: Session, item: schemas.RequestItem):
-    db_item = models.Request(**item.dict())
+    link_id = generate_string(10)
+    db_item = models.Request(link_id=link_id, **item.dict())
     db.add(db_item)
     db.commit()
     db.refresh(db_item)

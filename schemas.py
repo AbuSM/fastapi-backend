@@ -13,3 +13,12 @@ class RequestItem(BaseModel):
     issued_by: str
     address: Optional[str] = None
     analysis_date: Optional[str] = None
+
+
+class RequestResponse(RequestItem):
+    id: int
+    link_id: str
+    order_id: int = None
+
+    class Config:
+        orm_mode = True
